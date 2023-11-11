@@ -8,6 +8,13 @@ function sendNumberValue(number) {
     calculatorDisplay.textContent = displayValue === '0' ? number : displayValue + number;
 }
 
+function addDecimal() {
+    // if no decimal add one
+    if (!calculatorDisplay.textContent.includes('.')) {
+        calculatorDisplay.textContent = `${calculatorDisplay.textContent}.`;
+    }
+}
+
 // Add Event Listners for numbers, operators and decimal buttons
 
 inputBtns.forEach((inputBtn) => {
@@ -15,8 +22,16 @@ inputBtns.forEach((inputBtn) => {
         if (inputBtn.classList.length === 0 || inputBtn.classList.contains('operator')) {
             sendNumberValue(inputBtn.value);
         } else if (inputBtn.classList.contains('decimal')) {
-            sendNumberValue();
+            addDecimal();
         }
     });
 });
 
+// Reset Display
+function resetAll() {
+    calculatorDisplay.textContent = '0';
+}
+
+// Event Listner
+
+clearBtn.addEventListener('click', resetAll);
